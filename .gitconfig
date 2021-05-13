@@ -1,0 +1,5 @@
+[user]
+	name = NakZMichael
+	email = nakazato.muka@gmail.com
+[credential]
+	helper = "!f() { /home/app/.vscode-server/bin/3c4e3df9e89829dce27b7b5c24508306b151f30d/node /tmp/vscode-remote-containers-3c0f60f74ad164d801bc1dd4ceb37b8e6251c671.js $*; }; f"

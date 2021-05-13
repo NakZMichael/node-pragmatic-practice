@@ -1,0 +1,17 @@
+version: "3"
+services:
+  node:
+    container_name: node
+    build: 
+      context: ./
+      dockerfile: ./dockerfiles/dev/Dockerfile
+    volumes:
+      - .:/home/dev/app
+      # include a line below to speed up install packages.
+      - node_modules_volume:/home/dev/app/node_modules
+    tty: true
+    ports:
+     - 127.0.0.1:3000:3000
+
+volumes:
+  node_modules_volume:
