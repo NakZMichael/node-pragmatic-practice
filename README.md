@@ -37,7 +37,40 @@ docker-compose build
 docker-compose up -d
 ```
 
-Then use the extension of Visual Studio Code, `Remote - Containers`.
+Then use the extension of Visual Studio Code, `Remote - Containers` and `ESLint`.
+
+# How to test
+
+Install packages below.
+
+```
+yarn add -D jest @types/jest ts-jest
+```
+
+Then add `jest.config.js` and write codes below.
+
+```
+module.exports = {
+  "roots": [
+    "<rootDir>/src"
+  ],
+  "testMatch": [
+    "**/__tests__/**/*.+(ts|tsx|js)",
+    "**/?(*.)+(spec|test).+(ts|tsx|js)"
+  ],
+  "transform": {
+    "^.+\\.(ts|tsx)$": "ts-jest"
+  },
+}
+```
+
+Finaly, add script below to `package.json`.
+
+```
+{
+  "test": "jest"
+}
+```
 
 # How to start Express application
 
