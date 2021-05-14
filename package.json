@@ -19,7 +19,7 @@
   "scripts": {
     "build": "tsc",
     "start": "yarn build && node ./dist/server.js",
-    "test": "jest"
+    "test": "jest --coverage --verbose"
   },
   "dependencies": {
     "@types/express": "^4.17.11",

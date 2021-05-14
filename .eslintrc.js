@@ -42,6 +42,10 @@ module.exports = {
       'error',
       'always'
     ],
-    'arrow-spacing':{ 'before': true, 'after': true }
+    'arrow-spacing':[
+      'error',
+      { 'before': true, 'after': true }
+    ],
+    '@typescript-eslint/type-annotation-spacing': 'error'
   }
 };

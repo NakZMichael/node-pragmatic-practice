@@ -68,7 +68,7 @@ Finaly, add script below to `package.json`.
 
 ```
 {
-  "test": "jest"
+  "test": "jest --coverage --verbose"
 }
 ```
 

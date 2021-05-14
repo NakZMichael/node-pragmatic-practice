@@ -1,6 +1,7 @@
-import { app } from './app';
+import { app } from './controllers/app';
+import config from './config';
 
-const port = 3000;
+const port = config.app.port;
 app.listen(port, () => {
   console.log(`App listening on port http://localhost:${port} !!`);
 });
