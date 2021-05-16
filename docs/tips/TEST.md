@@ -4,6 +4,7 @@
 - jestでタグをつける方法を調べる。
 - sinon
 - node-mock-http
+- !をつけるときの意味は[ここをみて](https://google.github.io/styleguide/tsguide.html#type-and-non-nullability-assertions)
 
 
 ## 最低でも、API（コンポーネント）のテストを書く
@@ -431,51 +432,3 @@ test("A request without authentication header, should return http status 403", (
 });
 ```
 
-```javascript
-import { Entity, Column, PrimaryGeneratedColumn, Repository } from 'typeorm';
-
-interface PhotoProps{
-  db: Repository<Photo>
-  name: string
-  description?: string
-  filename: string
-  views?: number
-  isPublished?: boolean
-}
-
-@Entity()
-export class Photo {
-  db: Repository<Photo>
-
-  @PrimaryGeneratedColumn()
-  id?: number;
-
-  @Column({
-    length: 100
-  })
-  name: string;
-
-  @Column({ nullable:true })
-  description?: string;
-
-  @Column({ unique:true })
-  filename: string;
-
-  @Column('double')
-  views: number;
-
-  @Column({ nullable:true })
-  isPublished?: boolean;
-
-  constructor(props: PhotoProps){
-    this.db = props.db;
-    this.name = props.name;
-    this.description = props.description;
-    this.filename = props.filename;
-    this.views = props.views?props.views:0;
-  }
-  public create = async (): Promise<Photo> => {
-    const createdPhoto = await this.db.save(this);
-    return createdPhoto;
-  }
-}

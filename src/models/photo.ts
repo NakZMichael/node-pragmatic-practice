@@ -2,7 +2,7 @@ import { Entity, Column, PrimaryGeneratedColumn, Repository, Connection, AfterLo
 
 interface PhotoProps{
   db: Repository<Photo>
-  name: string
+  userName: string
   description?: string
   filename: string
   views?: number
@@ -20,7 +20,7 @@ export class Photo {
   @Column({
     length: 100
   })
-  name!: string;
+  userName!: string;
 
   @Column({ nullable:true })
   description?: string;
@@ -40,7 +40,7 @@ export class Photo {
     //  Same reason make properties to assertion
     if(props){
       this.db = props.db;
-      this.name = props.name;
+      this.userName = props.userName;
       this.description = props.description;
       this.filename = props.filename;
       this.views = props.views?props.views:0;

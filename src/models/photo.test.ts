@@ -2,7 +2,9 @@ import 'reflect-metadata';
 import { Connection, createConnection, Repository } from 'typeorm';
 import { getPhotoRepository, Photo } from './photo';
 import { testDB } from '../utils/testUtils/dbConfig';
+import faker from 'faker';
 
+// Unit under test
 describe('Test the Photo.create()', () => {
 
   // create a global connection within this test
@@ -17,22 +19,27 @@ describe('Test the Photo.create()', () => {
       await connection.close();
     }
   });
+  //Scenario
   describe('It insert a photo entitiy itself into the database.', () => {
+    //Expectation
     test(`If it receives the correct parameter set, 
     the photo entity fetched from the database should be equal to it.`, async () => {
 
       // Arrange      
       // arrange an photo object
+      const userName = faker.name.findName();
+      const description = faker.lorem.sentence();
+      const fileName = faker.system.fileName();
       const photo = new Photo({
         db:repository,
-        name:'Jean random',
-        description:'I am near polar bears',
-        filename:'photo-with-bears.jpg',
+        userName: userName,
+        description:description,
+        filename:fileName,
       });
       
       // Act
       await photo.create();
-      const result = await repository.findOne({ name:'Jean random' });
+      const result = await repository.findOne({ userName:userName });
       
       // Assert
       expect(result?.id).toEqual(photo.id);
@@ -42,7 +49,7 @@ describe('Test the Photo.create()', () => {
       // arrange an photo object
       const photo = new Photo({
         db:repository,
-        name:'Jean random',
+        userName:'Jean random',
         description:'I am near polar bears',
         filename:'photo-with-bears.jpg',
       });
@@ -61,17 +68,17 @@ describe('Test the Photo.create()', () => {
       // arrange an photo object
       const photo = new Photo({
         db:repository,
-        name:'Jean random1',
+        userName:'Jean random1',
         description:'I am near polar bears1',
         filename:'photo-with-bears.jpg1',
         views:0,
       });
       await photo.create();
-      const fetchedPhoto = await repository.findOne({ name:'Jean random1' });
+      const fetchedPhoto = await repository.findOne({ userName:'Jean random1' });
       if(!fetchedPhoto){
         fail(new Error('Failed to fetch the photo inserted.'));
       }
-      fetchedPhoto.name = 'fetched';
+      fetchedPhoto.userName = 'fetched';
 
       // Act && Assert
       await expect(fetchedPhoto.create).rejects.toThrow();
@@ -105,17 +112,17 @@ describe('Test the Photo.update()', () => {
       // arrange an photo object
       const photo = new Photo({
         db:repository,
-        name:'Jean random1',
+        userName:'Jean random1',
         description:'I am near polar bears1',
         filename:'photo-with-bears.jpg1',
         views:0,
       });
       await photo.create();
-      const fetchedPhoto = await repository.findOne({ name:'Jean random1' });
+      const fetchedPhoto = await repository.findOne({ userName:'Jean random1' });
       if(!fetchedPhoto){
         fail(new Error('Failed to fetch the photo inserted.'));
       }
-      fetchedPhoto.name = 'fetched';
+      fetchedPhoto.userName = 'fetched';
   
       // Act && Assert
       await expect(fetchedPhoto.update).resolves;
@@ -126,14 +133,14 @@ describe('Test the Photo.update()', () => {
     // arrange an photo object
     const photo = new Photo({
       db:repository,
-      name:'Jean random',
+      userName:'Jean random',
       description:'I am near polar bears',
       filename:'photo-with-bears.jpg',
     });
       
     // Act
     await photo.create();
-    const result = await repository.findOne({ name:'Jean random' });
+    const result = await repository.findOne({ userName:'Jean random' });
       
     await connection.close();
       
@@ -145,7 +152,7 @@ describe('Test the Photo.update()', () => {
     // arrange an photo object
     const photo = new Photo({
       db:repository,
-      name:'Jean random',
+      userName:'Jean random',
       description:'I am near polar bears',
       filename:'photo-with-bears.jpg',
     });
@@ -177,17 +184,17 @@ describe('Test the Photo.getDbByGetConnection()', () => {
       // arrange an photo object
       const photo = new Photo({
         db:repository,
-        name:'Jean random1',
+        userName:'Jean random1',
         description:'I am near polar bears1',
         filename:'photo-with-bears.jpg1',
         views:0,
       });
       await photo.create();
-      const fetchedPhoto = await repository.findOne({ name:'Jean random1' });
+      const fetchedPhoto = await repository.findOne({ userName:'Jean random1' });
       if(!fetchedPhoto){
         fail(new Error('Failed to fetch the photo inserted.'));
       }
-      fetchedPhoto.name = 'fetched';
+      fetchedPhoto.userName = 'fetched';
 
       // Act && Assert
       expect(fetchedPhoto.db).not.toBe(undefined);

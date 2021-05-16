@@ -23,7 +23,7 @@ createConnection({
 }).then(async connection => {
   const photo = new Photo({
     db:connection.getRepository(Photo),
-    name:'Me and Bears',
+    userName:'Me and Bears',
     filename:'photo-with-bears.jpg',
     views:1,
     isPublished:true
