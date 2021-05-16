@@ -9,6 +9,7 @@ interface PhotoProps{
   isPublished?: boolean
 }
 
+
 @Entity()
 export class Photo {
   db!: Repository<Photo>
@@ -51,13 +52,18 @@ export class Photo {
     this.db = getPhotoRepository(connection);
   }
 
-  public create = async (): Promise<Photo> => {
-    try{
-      const createdPhoto = await this.db.save(this);
-      return createdPhoto;
-    }catch(e){
-      console.log('Failed to create');
-      throw e;
+  public create = async (): Promise<void> => {
+    if(this.id){
+      throw new Error('This object has Id.Maybe it already has been inserted');
+    }
+    await this.db.insert(this);
+  }
+
+  public update = async (): Promise<void> => {
+    if(this.id){
+      await this.db.save(this);
+    }else{
+      throw new Error('This object doesn\'t have Id.Maybe it has never been inserted');
     }
   }
 }
