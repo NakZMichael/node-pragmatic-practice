@@ -1,7 +1,7 @@
 {
   "name": "node-pragmatic-practice",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "app.js",
   "repository": "git@github.com:NakZMichael/node-pragmatic-practice.git",
   "author": "NakZMichael <nakazato.muka@gmail.com>",
   "license": "MIT",
@@ -25,6 +25,9 @@
     "@types/express": "^4.17.11",
     "express": "^4.17.1",
     "jest": "^26.6.3",
-    "ts-node": "^9.1.1"
+    "mysql2": "^2.2.5",
+    "reflect-metadata": "^0.1.13",
+    "ts-node": "^9.1.1",
+    "typeorm": "^0.2.32"
   }
 }

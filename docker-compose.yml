@@ -4,14 +4,60 @@ services:
     container_name: node
     build: 
       context: ./
-      dockerfile: ./dockerfiles/dev/Dockerfile
+      dockerfile: ./dockerfiles/server/dev/Dockerfile
     volumes:
       - .:/home/dev/app
       # include a line below to speed up install packages.
       - node_modules_volume:/home/dev/app/node_modules
+    networks: 
+      - node-network
     tty: true
     ports:
-     - 127.0.0.1:3000:3000
+      - 127.0.0.1:3000:3000     
+  db:
+    container_name: node_db
+    build: 
+      context: ./
+      dockerfile: ./dockerfiles/db/dev/Dockerfile
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: node_root_password
+      MYSQL_DATABASE: node_db
+      MYSQL_USER: node_user
+      MYSQL_PASSWORD: node_password
+      TZ: 'Asia/Tokyo'
+    volumes:
+      - node-db:/var/lib/mysql
+    ports:
+      - 3306:3306
+    networks: 
+      - node-network
+    tty: true
+
+  test_db:
+    container_name: test_node_db
+    build: 
+      context: ./
+      dockerfile: ./dockerfiles/db/test/Dockerfile
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: test_node_root_password
+      MYSQL_DATABASE: test_node_db
+      MYSQL_USER: test_node_user
+      MYSQL_PASSWORD: test_node_password
+      TZ: 'Asia/Tokyo'
+    volumes:
+      - test-node-db:/var/lib/mysql
+    ports:
+      - 3307:3306
+    networks: 
+      - node-network
+    tty: true
 
 volumes:
   node_modules_volume:
+  node-db:
+  test-node-db:
+
+networks:
+  node-network:

@@ -80,3 +80,7 @@ We already wrote package.json, so that just execute a command below to start the
 yarn start
 ```
 
+# References
+
+- [javascript-testing-best-practices](https://github.com/goldbergyoni/javascript-testing-best-practices/)
+- [nodebestpractices](https://github.com/goldbergyoni/nodebestpractices)
