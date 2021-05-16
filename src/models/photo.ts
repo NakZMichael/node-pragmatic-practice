@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, Repository, Connection, AfterLoad, getConnection } from 'typeorm';
 
-interface PhotoProps{
+export interface PhotoProps{
   db: Repository<Photo>
   userName: string
   description?: string

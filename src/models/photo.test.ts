@@ -35,6 +35,7 @@ describe('Test the Photo.create()', () => {
         userName: userName,
         description:description,
         filename:fileName,
+        views:1,
       });
       
       // Act

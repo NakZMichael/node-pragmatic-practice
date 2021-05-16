@@ -1,7 +1,7 @@
 import express from 'express';
 import { customerHandler } from './controllers/customer';
 import config from './config';
-import { photoHandler } from './controllers/photoControllers';
+import { getAllPhotoHandler } from './controllers/photoController';
 
 
 
@@ -10,7 +10,7 @@ app.use(express.json());
 
 app.get(config.app.customer.api,customerHandler);
 
-app.get('/photos', photoHandler);
+app.get('/photos', getAllPhotoHandler);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');

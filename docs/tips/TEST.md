@@ -1,8 +1,9 @@
 ## TODO: What I need to search about
 
-- 脆弱性を検査するツールを調べる。
 - jestでタグをつける方法を調べる。
-- sinon
+- sinon(スパイ)
+- Sonarqubeを調べる。(静的解析ツール)
+- jenkinsを覚える。
 - node-mock-http
 - !をつけるときの意味は[ここをみて](https://google.github.io/styleguide/tsguide.html#type-and-non-nullability-assertions)
 
