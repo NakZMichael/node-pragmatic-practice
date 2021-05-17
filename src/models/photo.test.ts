@@ -1,7 +1,8 @@
 import 'reflect-metadata';
 import { Connection, createConnection, Repository } from 'typeorm';
 import { getPhotoRepository, Photo } from './photo';
-import { testDB } from '../utils/testUtils/dbConfig';
+import config from '../config'
+;
 import faker from 'faker';
 
 // Unit under test
@@ -11,7 +12,7 @@ describe('Test the Photo.create()', () => {
   let connection: Connection;
   let repository: Repository<Photo>;
   beforeEach(async () => {
-    connection = await createConnection(testDB);
+    connection = await createConnection(config.test.db);
     repository = getPhotoRepository(connection);
   });
   afterEach(async () => {
@@ -93,7 +94,7 @@ describe('Test the Photo.update()', () => {
   let connection: Connection;
   let repository: Repository<Photo>;
   beforeEach(async () => {
-    connection = await createConnection(testDB);
+    connection = await createConnection(config.test.db);
     repository = getPhotoRepository(connection);
   });
   afterEach(async () => {
@@ -169,7 +170,7 @@ describe('Test the Photo.getDbByGetConnection()', () => {
   let connection: Connection;
   let repository: Repository<Photo>;
   beforeEach(async () => {
-    connection = await createConnection(testDB);
+    connection = await createConnection(config.test.db);
     repository = getPhotoRepository(connection);
   });
   afterEach(async () => {

@@ -7,7 +7,7 @@ export const getAllPhotoHandler: RequestHandler = async (req,res) => {
   return res.json(photos);
 };
 
-export const createNewPhotoHandler = async (req: Request,res: Response): Promise<void> => {
+export const createPhotoHandler = async (req: Request,res: Response): Promise<void> => {
   const newPhotoProps: PhotoProps  = {
     db:getPhotoRepository(getConnection()),
     userName:req.body.userName,

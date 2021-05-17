@@ -1,8 +1,8 @@
 import httpMocks from 'node-mocks-http';
 import { Connection, createConnection, Repository } from 'typeorm';
 import { getPhotoRepository, Photo, PhotoProps } from '../models/photo';
-import { testDB } from '../utils/testUtils/dbConfig';
-import { createNewPhotoHandler } from './photoController';
+import config from '../config';
+import { createPhotoHandler } from './photoController';
 import faker from 'faker';
 
 describe('Test createNewPhotoHandler()',() => {
@@ -10,7 +10,7 @@ describe('Test createNewPhotoHandler()',() => {
   let connection: Connection;
   let repository: Repository<Photo>;
   beforeEach(async () => {
-    connection = await createConnection(testDB);
+    connection = await createConnection(config.test.db);
     repository = getPhotoRepository(connection);
   });
   afterEach(async () => {
@@ -39,7 +39,7 @@ describe('Test createNewPhotoHandler()',() => {
       });
       const response = httpMocks.createResponse();
       // Act
-      await createNewPhotoHandler(request,response);
+      await createPhotoHandler(request,response);
       // Assertion
       const fetchedPhoto = await repository.findOne({ userName:userName });
       expect(fetchedPhoto).not.toEqual(undefined);

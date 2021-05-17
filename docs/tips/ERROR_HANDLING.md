@@ -2,10 +2,12 @@
 
 - prototype chain
   - Object.setPrototypeOf(this, new.target.prototype);
-- winston
-- jestでhandlerをテストする方法
 - APMを調べる
 - Validatorのライブラリを調べる
+- アプリ用に定義されたErrorを作る。
+- Errorハンドリングを一元化する
+- ロガーを使う winston
+- 未処理のPromiseを全て拾ってエラーハンドリングをする。
 
 ## Use Async-Await or promises for async error handling
 
