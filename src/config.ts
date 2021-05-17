@@ -4,7 +4,7 @@ const config: any =  {
   app:{
     server:{
       host:'localhost',
-      port:3030,
+      port:3000,
       api:{
         root:'/api/v1',
         customer:{

@@ -12,8 +12,7 @@ RUN useradd --user-group --create-home --shell /bin/false $USER
 ENV HOME=/home/$USER
 
 # Copy package.json and the gulpfile as root into the subdir where our app lies
-COPY ./src $HOME/$SUBDIR/src
-COPY package.json  tsconfig.json $HOME/$SUBDIR/
+COPY ./view $HOME/$SUBDIR
 
 # set the $USER as the owner of the $HOME directory.  Necessary after copying the files from the line above
 RUN chown -R $USER:$USER $HOME/*
@@ -26,7 +25,5 @@ WORKDIR $HOME/$SUBDIR
 # As this user, finally run yarn 
 RUN yarn
 RUN yarn build
-
-EXPOSE 3000
 
 # CMD ["bash -c ","yarn start"]

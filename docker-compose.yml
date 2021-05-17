@@ -13,7 +13,23 @@ services:
       - node-network
     tty: true
     ports:
-      - 127.0.0.1:3000:3000     
+      - 127.0.0.1:3000:3000  
+
+  react:
+    container_name: react
+    build: 
+      context: ./
+      dockerfile: ./dockerfiles/front/dev/Dockerfile
+    volumes:
+      - ./view:/home/dev/app
+      # include a line below to speed up install packages.
+      - react_node_modules_volume:/home/dev/app/node_modules
+      - react_public_volume:/home/dev/app/public
+    networks: 
+      - node-network
+    tty: true
+    ports:
+      - 127.0.0.1:3001:3001
   db:
     container_name: node_db
     build: 
@@ -56,6 +72,8 @@ services:
 
 volumes:
   node_modules_volume:
+  react_node_modules_volume:
+  react_public_volume:
   node-db:
   test-node-db:
 

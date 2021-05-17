@@ -80,6 +80,14 @@ We already wrote package.json, so that just execute a command below to start the
 yarn start
 ```
 
+# viewディレクトリについて
+
+Reactのフロントエンドのアプリです
+
+もしS3などのCDNを使うのであればプロジェクトごと分けた方がいいのかもしれないが、フロントエンド込みでE2Eテストをする場合に完全に分かれているとdocker-composeの設定なども分けないといけなくなるので...
+
+どうするのが正解なんだ....
+
 # References
 
 - [javascript-testing-best-practices](https://github.com/goldbergyoni/javascript-testing-best-practices/)
