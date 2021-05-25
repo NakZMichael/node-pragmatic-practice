@@ -5,19 +5,19 @@ Simple node application based on "The Pragmatic Programmer" and [nodebestpraciti
 
 ```
 yarn init
-yarn add --dev typescript
+yarn add --dev typescript ts-node ts-node-dev jest
 npx tsc --init
 mkdir src
-mkdir public
+mkdir dist
 ```
 
-And config `./sconfig.json` like the one in this project.
+And config `./tsconfig.json` like the one in this project.
 
 # How to set up Eslint and auto fix
 
 ```
 yarn add -D eslint
-yarn run eslint --init
+yarn eslint --init
 ```
 
 And config `./.vscode/settings.json` like below

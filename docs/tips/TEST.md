@@ -251,6 +251,14 @@ it("When visiting TestJavaScript.com home page, a menu is displayed", () => {
 });
 ```
 
+## Component testing might be your best affair
+
+## Ensure new releases don’t break the API using contract tests
+
+Pact良さげ
+
+https://docs.pact.io/5-minute-getting-started-guide
+
 ## Linter を用いてコードの問題を検出する
 
 ## グローバルなテストフィクスチャとシードを避け、テストごとにデータを追加する

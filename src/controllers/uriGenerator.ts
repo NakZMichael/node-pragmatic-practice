@@ -11,6 +11,6 @@ export function uriGenerator(serviceName: string): string{
   if(typeof serviceApi === 'string'){
     return rootUri;
   }else{ 
-    return path.join(rootUri,serviceApi.api);
+    return path.join(rootUri, serviceApi.api);
   }
 }

@@ -46,6 +46,8 @@ module.exports = {
       'error',
       { 'before': true, 'after': true }
     ],
-    '@typescript-eslint/type-annotation-spacing': 'error'
+    'comma-spacing': ['error', { 'before': false, 'after': true }],
+    '@typescript-eslint/type-annotation-spacing': 'error',
+    '@typescript-eslint/explicit-module-boundary-types': 'off'
   }
 };

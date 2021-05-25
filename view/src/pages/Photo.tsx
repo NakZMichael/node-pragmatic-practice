@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import { Paper, Button } from '@material-ui/core';
+import { Paper, Button, Typography } from '@material-ui/core';
 import axios from 'axios'
 
 const useStyles = makeStyles((theme) => ({
@@ -58,6 +58,7 @@ export const Photo = ()=>{
       </AppBar>
       </header>
         <Paper className={classes.paper} elevation={0}>
+          <Typography variant='h1'>Photo</Typography>
           <TextField id="userName" label="User Name" variant="filled" className={classes.textField} value={userName} onChange={(e)=>setUserName(e.target.value)} />
           <TextField id="fileName" label="File Name" variant="filled" className={classes.textField} value={fileName} onChange={(e)=>setFileName(e.target.value)}/>
           <Button variant="contained" color="primary" onClick={onSubmit}>

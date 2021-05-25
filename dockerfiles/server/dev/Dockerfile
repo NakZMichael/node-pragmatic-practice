@@ -1,5 +1,5 @@
 # Specify the image that this app is going to be built from.  This is a docker hub hosted Node image
-FROM node:latest
+FROM node:14.17
 
 # Specify the username this app is going to run in
 ENV USER=dev
