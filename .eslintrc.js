@@ -48,6 +48,7 @@ module.exports = {
     ],
     'comma-spacing': ['error', { 'before': false, 'after': true }],
     '@typescript-eslint/type-annotation-spacing': 'error',
-    '@typescript-eslint/explicit-module-boundary-types': 'off'
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/no-empty-function':'off'
   }
 };

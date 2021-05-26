@@ -46,6 +46,7 @@ export class Photo {
       this.views = props.views?props.views:0;
     }
   }
+
   @AfterLoad()
   getDbByGetConnection(): void {
     const connection = getConnection();
@@ -66,6 +67,15 @@ export class Photo {
       throw new Error('This object doesn\'t have Id.Maybe it has never been inserted');
     }
   }
+
+  public toJSON = () => ({
+    id:this.id,
+    userName:this.userName,
+    description:this.description,
+    filename:this.filename,
+    views:this.views,
+    isPublished:this.isPublished,
+  })
 }
 
 export function getPhotoRepository(connection: Connection): Repository<Photo>{

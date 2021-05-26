@@ -5,7 +5,7 @@ import config from '../config';
 import { createPhotoHandler } from './photoController';
 import faker from 'faker';
 
-describe('Test createNewPhotoHandler()',() => {
+describe('Test createNewPhotoHandler()', () => {
   // create a global connection within this test
   let connection: Connection;
   let repository: Repository<Photo>;
@@ -19,8 +19,8 @@ describe('Test createNewPhotoHandler()',() => {
     }
   });
 
-  describe('When it recieves request, it create a photo entity',() => {
-    test('If the request has the body having a correct set of parameters, a photo entieies should be created',async () => {
+  describe('When it recieves request, it create a photo entity', () => {
+    test('If the request has the body having a correct set of parameters, a photo entieies should be created', async () => {
       // Arrange
       const userName = faker.name.findName(); 
       const description = faker.lorem.sentence();
@@ -39,7 +39,7 @@ describe('Test createNewPhotoHandler()',() => {
       });
       const response = httpMocks.createResponse();
       // Act
-      await createPhotoHandler(request,response);
+      await createPhotoHandler(request, response, () => {});
       // Assertion
       const fetchedPhoto = await repository.findOne({ userName:userName });
       expect(fetchedPhoto).not.toEqual(undefined);

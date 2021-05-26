@@ -8,6 +8,7 @@
   "devDependencies": {
     "@types/jest": "^26.0.23",
     "@types/supertest": "^2.0.11",
+    "@types/uuid": "^8.3.0",
     "@typescript-eslint/eslint-plugin": "^4.23.0",
     "@typescript-eslint/parser": "^4.23.0",
     "eslint": "^7.26.0",
@@ -37,6 +38,7 @@
     "reflect-metadata": "^0.1.13",
     "ts-node": "^10.0.0",
     "typeorm": "^0.2.32",
+    "uuid": "^8.3.2",
     "winston": "^3.3.3"
   }
 }

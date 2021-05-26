@@ -12,26 +12,21 @@ app.get(path.join(uriGenerator('photo'), 'all'), async(req, res, next) => {
   await getAllPhotoHandler(req, res, next);
   next();
 });
-app.post(path.join(uriGenerator('photo'), 'create'), async (req, res, next) => {
-  await createPhotoHandler(req, res);
-  next();
-});
+app.post(path.join(uriGenerator('photo'), 'create'), createPhotoHandler);
 
-app.get('/', (req, res, next) => {
-  res.send('Hello World!');
-  console.log('Hello, World');
-  next();
-});
+app.get('/', getAllPhotoHandler);
 
-app.get('*', function(req, res, next){
+app.get('*', function(req, res){
   res.status(404);
   res.send('404 Not found!');
-  next();
+  throw new Error(`404 Not Found Error: ${req.url}`);
 });
 
 const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).send('Something broke!');
+  if(!res.statusCode){
+    res.status(500).send('Something broke!');
+  }
   next();
 };
 
