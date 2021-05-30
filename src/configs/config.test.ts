@@ -30,12 +30,20 @@ describe('Test Config Class', () => {
       const sectionData = iniConfig.get('section');
 
       jsonConfig.set('section', sectionData);
-      jsonConfig.save(jsonFilePath);
-
-      const jsonString = await fs.promises.readFile(jsonFilePath, 'utf-8');
+      await jsonConfig.save(jsonFilePath);
+      let jsonString = '';
+      jsonString = await fs.promises.readFile(jsonFilePath, 'utf-8');
+      let jsonParesed = {}; 
+      try{
+        jsonParesed= JSON.parse(jsonString);
+      }catch(e){
+        console.log(e);
+        console.log('Invalid JSON String: input =  ', jsonString);
+        throw e;
+      }
 
       // Assert
-      expect(JSON.parse(jsonString)).toEqual({
+      expect(jsonParesed).toEqual({
         section:{
           a:'a',
           b:'b',

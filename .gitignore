@@ -105,3 +105,6 @@ dist
 
 # .vscode-server
 .vscode-server/
+
+# DS_STORE
+**/.DS_STORE

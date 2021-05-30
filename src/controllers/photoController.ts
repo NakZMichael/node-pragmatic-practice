@@ -1,40 +1,41 @@
 import { getConnection } from 'typeorm';
-import { getPhotoRepository, Photo, PhotoProps } from '../models/photo';
-import { AppContext, AppHandler,  simpleWrapper } from './handlerWrapper';
+import { PhotoProps, PhotoService } from '../photoComponent/photo';
+import {  AppHandler, handlerWrapper,   } from './common/handlerWrapper';
 
-const getAllPhotoAppHandler: AppHandler<AppContext> = async (req, res, ctx) => {
-  const photos = await getConnection().getRepository(Photo).find();
+const getAllPhotoAppHandler: AppHandler = async (req, res, next, logger) => {
+  const dbConnection = getConnection();
+  const photoService = new PhotoService(dbConnection, logger) ;
+  const photos = await photoService.find();
   res.json({ ...photos });
-  ctx = {
-    ...ctx,
+  logger.info({
     status:200,
-    photos:JSON.stringify(photos),
-  };
-  return ctx;
+    photos:photos,
+  });
 };
-export const getAllPhotoHandler = simpleWrapper(getAllPhotoAppHandler);
 
-const createPhotoAppHandler: AppHandler<AppContext> = async (req, res, ctx) => {
+const createPhotoAppHandler: AppHandler = async (req, res, next, logger) => {
   if(!req.body.userName){
     throw new Error('Request body does not have value of userName filed');
   }
   const newPhotoProps: PhotoProps  = {
-    db:getPhotoRepository(getConnection()),
     userName:req.body.userName,
     filename:req.body.filename,
+    views:req.body.view,
+    description:req.body.description,
+    isPublished:req.body.isPublished
   };
-  const photo = new Photo(newPhotoProps);
-  await photo.create();
+  const dbConnection = getConnection();
+  const photoService = new PhotoService(dbConnection, logger) ;
+  const photo = await photoService.create(newPhotoProps);
   res.status(200);
   res.json(photo.id);
 
-  ctx = {
-    ...ctx,
+  logger.info({
     status:200,
     photoId:photo.id,
-  };
-  return ctx;
+  });
 };
 
 
-export const createPhotoHandler = simpleWrapper(createPhotoAppHandler);
+export const getAllPhotoHandler = handlerWrapper(getAllPhotoAppHandler);
+export const createPhotoHandler = handlerWrapper(createPhotoAppHandler);

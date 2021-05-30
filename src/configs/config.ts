@@ -18,13 +18,13 @@ export class Config {
     return objectPath.set(this.data, configPath, value);
   }
   load = async(filePath: string) => {
-    console.log(`Seserializing from ${filePath}`);
+    console.log(`Serializing from ${filePath}`);
     this.data = this.formatStrategy.deserialize(
       await fs.promises.readFile(filePath, 'utf-8')
     );
   }
   save = async(filePath: string) => {
     console.log(`Serializeing to ${filePath}`);
-    await fs.promises.writeFile(filePath, this.formatStrategy.serialize(this.data));
+    await fs.promises.writeFile(filePath, this.formatStrategy.serialize(this.data), 'utf-8');
   }
 }

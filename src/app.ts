@@ -1,7 +1,9 @@
 import express, { ErrorRequestHandler } from 'express';
 import { createPhotoHandler as createPhotoHandler, getAllPhotoHandler } from './controllers/photoController';
 import path from 'path';
-import { uriGenerator } from './controllers/uriGenerator';
+import { uriGenerator } from './controllers/common/uriGenerator';
+import { AppLogger } from './logging';
+import { AppError, WrappedError } from './error';
 
 
 
@@ -23,7 +25,16 @@ app.get('*', function(req, res){
 });
 
 const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
-  console.error(err.stack);
+  console.log(err.constructor.name);
+  if(err instanceof AppError){
+    const { logger, ...modifiedError } = err;
+    modifiedError.stack = err.stack;
+    logger.error(modifiedError);
+  }
+  else{
+    console.error('Unwrapped Error is caught, please use classe of WrappedError');
+    console.error(err);
+  }
   if(!res.statusCode){
     res.status(500).send('Something broke!');
   }

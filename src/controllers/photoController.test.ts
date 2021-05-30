@@ -1,9 +1,10 @@
 import httpMocks from 'node-mocks-http';
 import { Connection, createConnection, Repository } from 'typeorm';
-import { getPhotoRepository, Photo, PhotoProps } from '../models/photo';
+import { Photo, PhotoProps, PhotoService } from '../photoComponent/photo';
 import config from '../config';
 import { createPhotoHandler } from './photoController';
 import faker from 'faker';
+import { AppLogger } from '../logging';
 
 describe('Test createNewPhotoHandler()', () => {
   // create a global connection within this test
@@ -11,7 +12,7 @@ describe('Test createNewPhotoHandler()', () => {
   let repository: Repository<Photo>;
   beforeEach(async () => {
     connection = await createConnection(config.test.db);
-    repository = getPhotoRepository(connection);
+    repository = connection.getRepository(Photo);
   });
   afterEach(async () => {
     if(connection.isConnected){
@@ -26,7 +27,6 @@ describe('Test createNewPhotoHandler()', () => {
       const description = faker.lorem.sentence();
       const fileName = faker.system.fileName();
       const body: PhotoProps = {
-        db:repository,
         userName: userName,
         description:description,
         filename:fileName,
@@ -39,7 +39,14 @@ describe('Test createNewPhotoHandler()', () => {
       });
       const response = httpMocks.createResponse();
       // Act
-      await createPhotoHandler(request, response, () => {});
+      await new Promise(resolve => {
+        createPhotoHandler(request, response, (err: any) => {
+          console.log(err);
+          throw err;
+        });
+        setTimeout(resolve, 3000);
+      });
+
       // Assertion
       const fetchedPhoto = await repository.findOne({ userName:userName });
       expect(fetchedPhoto).not.toEqual(undefined);

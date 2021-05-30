@@ -1,4 +1,4 @@
-import { Photo } from './models/photo';
+import { Photo } from './photoComponent/photo';
 
 const config: any =  {
   app:{
